@@ -36,8 +36,8 @@ public class Baek_11725 {
         R = Integer.parseInt(st.nextToken());
 
         visited = new boolean[R + 1];
-        answer = new int[R + 1];
-        graph = new List[R + 1];
+        answer = new int[R + 2];
+        graph = new List[R + 2];
         for (int i = 0; i < graph.length; i++) {
             graph[i] = new ArrayList<>();
         }
