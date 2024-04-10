@@ -13,7 +13,7 @@ public class Baek_1182 {
 
     public static void main(String[] args) throws IOException {
         input();
-        prod(1, 0);
+        prod(0, 0);
         if(S == 0){
             answer--;
         }
@@ -21,7 +21,7 @@ public class Baek_1182 {
     }
 
     private static void prod(int ele, int sum) {
-        if (ele == N + 1) {
+        if (ele == N) {
             if(sum == S){
                 answer++;
             }
@@ -39,10 +39,10 @@ public class Baek_1182 {
 
         N = Integer.parseInt(st.nextToken());
         S = Integer.parseInt(st.nextToken());
-        arr = new int[N + 1];
+        arr = new int[N];
 
         st = new StringTokenizer(bf.readLine());
-        for (int i = 1; i <= N; i++) {
+        for (int i = 0; i < N; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
         }
     }
