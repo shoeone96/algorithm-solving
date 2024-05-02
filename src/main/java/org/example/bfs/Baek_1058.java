@@ -1,4 +1,4 @@
-package org.example.brute;
+package org.example.bfs;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class Baek_1058 {
         input();
         for (int i = 1; i <= N; i++) {
             isFriend[i] = true;
-            dfs(i);
+            bfs(i);
             if (count > answer) {
                 answer = count;
             }
@@ -29,7 +29,7 @@ public class Baek_1058 {
         System.out.println(answer);
     }
 
-    private static void dfs(int person) {
+    private static void bfs(int person) {
         Queue<Integer> queue = new ArrayDeque<>();
         for (int i = 1; i <= N; i++) {
             if (arr[person][i] == 'Y' && !isFriend[i]) {
