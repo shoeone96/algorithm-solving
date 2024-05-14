@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 public class Baek_10986 {
 
     static int N, M;
+<<<<<<< HEAD
     static int answer;
 <<<<<<< HEAD
     static int [] visited;
@@ -17,15 +18,23 @@ public class Baek_10986 {
     static long[] sum;
     static int[] left;
 >>>>>>> cafbc2e (PREFIX SUM: 백준 10986 수정 완료)
+=======
+    static long[] sum;
+    static long[] left;
+>>>>>>> d1bc63a (PREFIX SUM: 백준 10986 수정 완료)
 
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(bf.readLine());
 <<<<<<< HEAD
+<<<<<<< HEAD
         visited = new int[2];
 =======
 >>>>>>> cafbc2e (PREFIX SUM: 백준 10986 수정 완료)
         answer = 0;
+=======
+        long answer = 0;
+>>>>>>> d1bc63a (PREFIX SUM: 백준 10986 수정 완료)
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
@@ -41,22 +50,20 @@ public class Baek_10986 {
         prod(0);
 =======
         sum = new long[N + 1];
-        left = new int[M];
+        left = new long[M];
 
         st = new StringTokenizer(bf.readLine());
-        for (int i = 1; i <= N; i++) {
+        for (int i = 1; i < N + 1; i++) {
             sum[i] = (sum[i - 1] + Integer.parseInt(st.nextToken())) % M;
             if (sum[i] == 0) {
                 answer++;
             }
-            int leftNum = (int) sum[i];
-            left[leftNum]++;
-
+            left[(int) sum[i]]++;
         }
 
-        for (int j : left) {
-            if (j >= 1) {
-                answer += (j * (j - 1) / 2);
+        for (int i = 0; i < M; i++) {
+            if (left[i] > 1) {
+                answer += (left[i] * (left[i] - 1) / 2);
             }
         }
 >>>>>>> cafbc2e (PREFIX SUM: 백준 10986 수정 완료)
