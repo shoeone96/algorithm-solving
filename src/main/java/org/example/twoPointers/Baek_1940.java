@@ -8,25 +8,6 @@ import java.util.StringTokenizer;
 
 public class Baek_1940 {
 
-
-    public static void solution(int n, int m, int[] arr) {
-        int lt = 0;
-        int rt = n-1;
-        int answer = 0;
-        while(lt < rt){
-            if(arr[lt] + arr[rt] ==  m){
-                answer++;
-                lt ++;
-                rt --;
-            }else if(arr[lt] + arr[rt] < m){
-                lt++;
-            }else {
-                rt--;
-            }
-        }
-        System.out.println(answer);
-    }
-
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(bf.readLine());
@@ -35,13 +16,40 @@ public class Baek_1940 {
         st = new StringTokenizer(bf.readLine());
         int M = Integer.parseInt(st.nextToken());
 
-        int[] arr = new int[N];
         st = new StringTokenizer(bf.readLine());
+        int[] arr = new int[N];
         for (int i = 0; i < N; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
         }
-        Arrays.sort(arr);
-        solution(N, M, arr);
 
+        Arrays.sort(arr);
+
+        int right = 1;
+        int left = 0;
+        int answer = 0;
+
+        while (right < N && left < N - 1) {
+            if (arr[left] + arr[right] < M) {
+                if (right < N - 1) {
+                    right++;
+                    continue;
+                }
+                if (right == N - 1) {
+                    left++;
+                    right = left + 1;
+                    continue;
+                }
+            }
+
+            if (arr[left] + arr[right] == M) {
+                answer++;
+            }
+
+            left++;
+            right = left + 1;
+        }
+
+        System.out.println(answer);
     }
+
 }
