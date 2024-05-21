@@ -3,7 +3,8 @@ package org.example.stackQueue;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.StringTokenizer;
 
 public class Baek_1874 {
@@ -22,7 +23,7 @@ public class Baek_1874 {
 
         StringBuilder answer = new StringBuilder();
         int start = 1;
-        Stack<Integer> stack = new Stack<>();
+        Deque<Integer> stack = new ArrayDeque<>();
         for (int num : arr) {
 
             while (start <= num) {
