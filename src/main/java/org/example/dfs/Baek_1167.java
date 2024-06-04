@@ -50,18 +50,24 @@ public class Baek_1167 {
                 }
             }
         }
+        isVisited[1] = true;
+        dfs(1, 0);
 
+        int targetIndex = 1;
         for (int i = 1; i <= N; i++) {
-            isVisited[i] = true;
-            distance[i] = 0;
-            dfs(i, 0);
-            for (int j = 1; j <= N; j++) {
-                if (distance[j] > answer) {
-                    answer = distance[j];
-                }
+            if (distance[i] > distance[targetIndex]) {
+                targetIndex = i;
             }
-            isVisited = new boolean[N + 1];
-            distance = new int[N + 1];
+        }
+        isVisited = new boolean[N + 1];
+        isVisited[targetIndex] = true;
+        distance = new int[N + 1];
+        dfs(targetIndex, 0);
+
+        for(int i = 1; i < distance.length; i++){
+            if(distance[i] > answer){
+                answer = distance[i];
+            }
         }
 
         System.out.println(answer);
