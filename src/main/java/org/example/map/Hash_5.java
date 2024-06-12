@@ -1,0 +1,57 @@
+package org.example.map;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Collections;
+import java.util.Set;
+import java.util.StringTokenizer;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
+public class Hash_5 {
+
+    static int N, K;
+    static int [] arr;
+    static Set<Integer> answerArr;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(bf.readLine());
+
+        N = Integer.parseInt(st.nextToken());
+        K = Integer.parseInt(st.nextToken());
+        arr = new int[N];
+        answerArr = new TreeSet<>();
+
+        st = new StringTokenizer(bf.readLine());
+        for(int i = 0; i < N; i++){
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        backTracking(0, 0, 0);
+        if(K >= answerArr.size()){
+            System.out.println(-1);
+            return;
+        }
+        Integer answer = answerArr.stream()
+            .sorted(Collections.reverseOrder())
+            .collect(Collectors.toList())
+            .get(K -1);
+        System.out.println(answer);
+    }
+
+    private static void backTracking(int count, int sum, int index) {
+        if(count == 3){
+            answerArr.add(sum);
+            return;
+        }
+
+        for(int i = index; i < N; i++){
+            sum += arr[i];
+            backTracking(count + 1, sum, i  + 1);
+            sum -= arr[i];
+        }
+    }
+
+}
