@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
@@ -13,7 +14,7 @@ public class Hash_5 {
 
     static int N, K;
     static int [] arr;
-    static Set<Integer> answerArr;
+    static TreeSet<Integer> answerArr;
 
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
@@ -22,7 +23,7 @@ public class Hash_5 {
         N = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
         arr = new int[N];
-        answerArr = new TreeSet<>();
+        answerArr = new TreeSet<>(Comparator.reverseOrder());
 
         st = new StringTokenizer(bf.readLine());
         for(int i = 0; i < N; i++){
@@ -34,11 +35,14 @@ public class Hash_5 {
             System.out.println(-1);
             return;
         }
-        Integer answer = answerArr.stream()
-            .sorted(Collections.reverseOrder())
-            .collect(Collectors.toList())
-            .get(K -1);
-        System.out.println(answer);
+        int count = 0;
+        for(Integer ele : answerArr){
+            count++;
+            if(count == K){
+                System.out.println(ele);
+                return;
+            }
+        }
     }
 
     private static void backTracking(int count, int sum, int index) {
