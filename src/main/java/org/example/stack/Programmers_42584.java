@@ -9,11 +9,9 @@ public class Programmers_42584 {
         Deque<Integer> stack = new ArrayDeque<>();
         stack.push(0);
         for(int i = 1; i < prices.length; i++){
-            if(!stack.isEmpty()){
-                while(!stack.isEmpty() && prices[stack.peek()] > prices[i]){
-                    int pop = stack.pop();
-                    answer[pop] = i - pop;
-                }
+            while(!stack.isEmpty() && prices[stack.peek()] > prices[i]){
+                int pop = stack.pop();
+                answer[pop] = i - pop;
             }
 
             stack.push(i);
@@ -21,9 +19,6 @@ public class Programmers_42584 {
 
         while(!stack.isEmpty()){
             int pop = stack.pop();
-            if(pop == prices.length -1){
-                continue;
-            }
             answer[pop] = prices.length -1 -pop;
         }
 
