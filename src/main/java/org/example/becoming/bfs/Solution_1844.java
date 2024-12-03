@@ -20,9 +20,7 @@ public class Solution_1844 {
 
         while(!queue.isEmpty()){
             Location poll = queue.poll();
-            if(poll.row == maps.length -1 && poll.col == maps[0].length -1){
-                return maps[poll.row][poll.col];
-            }
+
             for(int i = 0; i < move.length; i++) {
                 int[] moveLocation = move[i];
                 Location newLocation = new Location(poll.row + moveLocation[0],
@@ -31,6 +29,10 @@ public class Solution_1844 {
                     queue.add(newLocation);
                     isVisited[newLocation.row][newLocation.col] = true;
                     maps[newLocation.row][newLocation.col] = maps[poll.row][poll.col] + 1;
+
+                    if(newLocation.row == maps.length -1 && newLocation.col == maps[0].length -1){
+                        return maps[newLocation.row][newLocation.col];
+                    }
                 }
             }
         }
