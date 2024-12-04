@@ -7,10 +7,6 @@ public class Solution_1844 {
 
     private static int [][] move = {{0,-1}, {-1, 0}, {0, 1}, {1, 0}};
 
-    public static void main(String[] args) {
-
-    }
-
     public int solution(int[][] maps) {
         boolean [][] isVisited = new boolean[maps.length][maps[0].length];
         Queue<Location> queue = new ArrayDeque<>();
@@ -20,19 +16,17 @@ public class Solution_1844 {
 
         while(!queue.isEmpty()){
             Location poll = queue.poll();
-
             for(int i = 0; i < move.length; i++) {
-                int[] moveLocation = move[i];
-                Location newLocation = new Location(poll.row + moveLocation[0],
-                    poll.col + moveLocation[1]);
-                if (validate(newLocation, maps) && !isVisited[newLocation.row][newLocation.col]){
+                int newRow = poll.row + move[i][0];
+                int newCol = poll.col + move[i][1];
+                if (validate(newRow, newCol, maps) && !isVisited[newRow][newCol]){
+                    if(newRow == maps.length -1 && newCol == maps[0].length -1){
+                        return maps[poll.row][poll.col] + 1;
+                    }
+                    Location newLocation = new Location(newRow, newCol);
                     queue.add(newLocation);
                     isVisited[newLocation.row][newLocation.col] = true;
                     maps[newLocation.row][newLocation.col] = maps[poll.row][poll.col] + 1;
-
-                    if(newLocation.row == maps.length -1 && newLocation.col == maps[0].length -1){
-                        return maps[newLocation.row][newLocation.col];
-                    }
                 }
             }
         }
@@ -40,13 +34,15 @@ public class Solution_1844 {
         return -1;
     }
 
-    private boolean validate(Location newLocation, int [][] maps) {
-        if(newLocation.row < 0 || newLocation.row >= maps.length || newLocation.col < 0 || newLocation.col >= maps[0].length){
+    private boolean validate(int newRow, int newCol, int [][] maps) {
+        if(newRow < 0 || newRow > maps.length -1 || newCol < 0 || newCol > maps[0].length -1){
             return false;
         }
-        if(maps[newLocation.row][newLocation.col] == 0){
+
+        if(maps[newRow][newCol] == 0){
             return false;
         }
+
         return true;
     }
 
